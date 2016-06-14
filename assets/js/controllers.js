@@ -382,7 +382,8 @@ mailhogApp.controller('MailCtrl', function ($scope, $http, $sce, $timeout) {
   $scope.tryDecodeContent = function(message) {
     var charset = "UTF-8"
     if(message.Content.Headers["Content-Type"][0]) {
-      // TODO
+      message.Content.Headers["Content-Type"][0].match(/charset=(\w+)/i);
+      charset = RegExp.$1.replace(/\"\'/, '');
     }
 
     var content = message.Content.Body;
